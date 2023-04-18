@@ -67,13 +67,13 @@ public class AudioManager : MonoBehaviour
             source.Play();
         }
 
-        public void PlayAudioIfNotPlaying(AudioType audioType, float pitch, bool loop = false)
+    public void PlayAudioIfNotPlaying(AudioType audioType, float pitch, bool loop = false)
         {
             if (IsAudioPlaying(audioType)) return;
             PlayAudio(audioType, pitch, loop);
         }
 
-        public void PlayAudio(AudioType audioType, float pitch, bool loop = false)
+    public void PlayAudio(AudioType audioType, float pitch, bool loop = false)
         {
             if (!IsAudioOn)
                 return;
@@ -91,13 +91,13 @@ public class AudioManager : MonoBehaviour
             source.Play();
         }
 
-        public void PlayAudioIfNotPlaying(AudioType audioType, bool loop, float time)
+    public void PlayAudioIfNotPlaying(AudioType audioType, bool loop, float time)
         {
             if (IsAudioPlaying(audioType)) return;
             PlayAudio(audioType, loop, time);
         }
 
-        public void PlayAudio(AudioType audioType, bool loop, float time)
+    public void PlayAudio(AudioType audioType, bool loop, float time)
         {
             if (!IsAudioOn)
                 return;
@@ -116,7 +116,7 @@ public class AudioManager : MonoBehaviour
             source.Play();
         }
 
-        public bool IsAudioPlaying(AudioType type)
+    public bool IsAudioPlaying(AudioType type)
         {
             var clip = audioItems.FirstOrDefault(x => x.AudioType == type);
             if (clip == null)
@@ -125,7 +125,7 @@ public class AudioManager : MonoBehaviour
             return audioSources.FirstOrDefault(x => x.clip == clip.AudioClip && x.isPlaying) != null;
         }
 
-        public void StopAudio(AudioType audioType)
+    public void StopAudio(AudioType audioType)
         {
             var clip = audioItems.FirstOrDefault(x => x.AudioType == audioType);
             if (clip == null)
@@ -137,7 +137,7 @@ public class AudioManager : MonoBehaviour
             sources.ForEach(x => x.Stop());
         }
 
-        private AudioSource GetAvailableSource()
+    private AudioSource GetAvailableSource()
         {
             var available = audioSources.FirstOrDefault(x => !x.isPlaying);
             if (available == null)
@@ -149,7 +149,7 @@ public class AudioManager : MonoBehaviour
             return available;
         }
 
-        public void SetMusicEnabled()
+    public void SetMusicEnabled()
         {
             var music = PlayerPrefs.GetInt("MusicOn");
 
@@ -166,4 +166,19 @@ public enum AudioType
     LevelSuccess = 25,
     LevelFailed = 30,
     Button = 35,
+    Footsteps,
+    VineClimbing,
+    Throwing,
+    Hitting,
+    Burning,
+    WaterSplash,
+    Falling,
+    Damage,
+    Grabbing,
+    Jumping,
+    Landing,
+    Alert,
+    GameMusic,
+    Ambient
+
 }

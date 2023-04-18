@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aee6276cf9002f4487e1b7724dfc695, type: 3}
+  m_Name: Skill Tree
+  m_EditorClassIdentifier: 
+  skillData:
+  - skillTypeName: Ignis
+    skills:
+    - name: Catch Fire
+      description: ' You can take a sparkle from a reachable fire source and hold
+        it in your palm.'
+      skillType: 0
+      price: 1
+    - name: Bouncing Sparkle
+      description: 'Bounce a sparkle off a non-flammable surface to ignite objects
+        that might be out of reach. '
+      skillType: 0
+      price: 1
+    - name: Fire Boost
+      description: Double-jump while holding a sparkle to consume it and reach higher
+        grounds with rocket effect.
+      skillType: 0
+      price: 1
+    - name: 'Fire Adaptiveness '
+      description: 'Increase the amount of time it takes to catch on fire and how
+        long you can stay alive while on fire. Passive ability. '
+      skillType: 0
+      price: 1
+  - skillTypeName: Aqua
+    skills: []
+  - skillTypeName: Terra
+    skills: []
+  - skillTypeName: Animus
+    skills: []
