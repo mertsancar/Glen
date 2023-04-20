@@ -1,19 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Character
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        
+        Movement();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Movement()
     {
-        
+        var horizontal = Input.GetAxisRaw("Horizontal");
+        rigidbody2D.velocity += new Vector2(horizontal, 0) * Time.deltaTime * speed;
+
     }
-    
 }

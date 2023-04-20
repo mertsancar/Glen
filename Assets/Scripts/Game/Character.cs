@@ -6,8 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Character : MonoBehaviour
 {
+    public Rigidbody2D rigidbody2D;
+    
     public int health;
+    public float speed;
     public bool isDead;
+    
     void Start()
     {
         isDead = false;
