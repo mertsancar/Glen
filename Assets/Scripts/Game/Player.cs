@@ -6,14 +6,17 @@ using UnityEngine;
 
 public class Player : Character
 {
+    public bool isStealth = false;
+
     [Header("Jump Controller")]
     [SerializeField] private int jumpPower;
     public Transform groundCheck;
     public LayerMask groundLayer;
     private bool isGrounded;
-    private bool isDragging = false;
+
 
     [Header("Trajectory")]
+    private bool isDragging = false;
     private Vector2 startPoint;
     private Vector2 endPoint;
     private Vector2 direction;
@@ -81,6 +84,7 @@ public class Player : Character
 
     private void Update()
     {
+        Movement();
         Shooting();
     }
 
@@ -138,5 +142,26 @@ public class Player : Character
     private void OnDragEnd()
     {
         Hide();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name == "House")
+        {
+            isStealth = true;
+            var houseSprite = collision.GetComponent<SpriteRenderer>();
+            houseSprite.color = new Color(houseSprite.color.r, houseSprite.color.g, houseSprite.color.b, .75f);
+        }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.name == "House")
+        {
+            isStealth = false;
+            var houseSprite = collision.GetComponent<SpriteRenderer>();
+            houseSprite.color = new Color(houseSprite.color.r, houseSprite.color.g, houseSprite.color.b, 1f);
+        }
     }
 }

@@ -37,8 +37,9 @@ public class EnemyPatrolBehaviour : StateMachineBehaviour
     
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
-        if (Vector2.Distance(_playerPos.position, animator.transform.position) <= 5f)
+        var player = _playerPos.GetComponent<Player>();
+
+        if (Vector2.Distance(_playerPos.position, animator.transform.position) <= 5f && !player.isStealth)
         {
             animator.SetBool(IsFollowing, true);
             animator.SetBool(IsPatrolling, false);
