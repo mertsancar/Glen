@@ -19,25 +19,98 @@ MonoBehaviour:
       description: ' You can take a sparkle from a reachable fire source and hold
         it in your palm.'
       skillType: 0
+      stageCount: 1
       price: 1
     - name: Bouncing Sparkle
       description: 'Bounce a sparkle off a non-flammable surface to ignite objects
         that might be out of reach. '
       skillType: 0
+      stageCount: 3
       price: 1
     - name: Fire Boost
       description: Double-jump while holding a sparkle to consume it and reach higher
         grounds with rocket effect.
       skillType: 0
+      stageCount: 2
       price: 1
     - name: 'Fire Adaptiveness '
       description: 'Increase the amount of time it takes to catch on fire and how
         long you can stay alive while on fire. Passive ability. '
       skillType: 0
+      stageCount: 3
       price: 1
   - skillTypeName: Aqua
-    skills: []
+    skills:
+    - name: Catch Water
+      description: You can take a waterball from a reachable water source and hold
+        it in your palm.
+      skillType: 1
+      stageCount: 1
+      price: 1
+    - name: Bubble
+      description: Throw the waterball back into a source of water to create a bubble.
+        Jump into this bubble to travel vertically.
+      skillType: 1
+      stageCount: 3
+      price: 1
+    - name: Ice
+      description: Throw the waterball back into a source of water to create a bubble.
+        Jump into this bubble to travel vertically.
+      skillType: 1
+      stageCount: 2
+      price: 1
+    - name: Water Adaptiveness
+      description: Increase your swimming speed and max oxygen capacity to swim longer.
+        Passive ability.
+      skillType: 1
+      stageCount: 3
+      price: 1
   - skillTypeName: Terra
-    skills: []
+    skills:
+    - name: Catch Earth
+      description: You can take a clod from a reachable earth source and hold it
+        in your palm.
+      skillType: 2
+      stageCount: 1
+      price: 1
+    - name: Vine Growing
+      description: Increase the length of your vines grow.
+      skillType: 2
+      stageCount: 4
+      price: 1
+    - name: Vine Trap
+      description: Throw a clod at an enemy to trap them in thick vines. It temporarily
+        stuns them.
+      skillType: 2
+      stageCount: 3
+      price: 1
+    - name: Earth Adaptiveness
+      description: Crawl faster when hiding in grass, climb vines faster. Fall from
+        greater heights without getting stunned. Passive ability.
+      skillType: 2
+      stageCount: 3
+      price: 1
   - skillTypeName: Animus
-    skills: []
+    skills:
+    - name: Element Reaching Range
+      description: Embrace elements in the environment from farther away.
+      skillType: 3
+      stageCount: 4
+      price: 1
+    - name: Throw Range
+      description: Increase your throwing distance.
+      skillType: 3
+      stageCount: 4
+      price: 1
+    - name: Throw Prediction
+      description: Extend the length of the line which predicts where your throw
+        will land, allowing you to make more accurate throws over longer distances.
+      skillType: 3
+      stageCount: 4
+      price: 1
+    - name: Extra Health
+      description: Gain physical resistance to unlock extra hit points, allowing
+        you to survive more attacks and falls.
+      skillType: 3
+      stageCount: 3
+      price: 1

@@ -24,7 +24,7 @@ public struct Skill
     public string name;
     public string description;
     public SkillType skillType;
-    public string stageIndex;
+    public string stageCount;
     public int price;
 }
 
