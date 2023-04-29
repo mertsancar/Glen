@@ -14,6 +14,7 @@ public class SkillTreeItem : ScriptableObject
 public struct SkillData
 {
     public string skillTypeName;
+    public SkillType skillType;
     public List<Skill> skills;
 }
 
@@ -23,9 +24,11 @@ public struct Skill
 {
     public string name;
     public string description;
-    public SkillType skillType;
     public string stageCount;
     public int price;
+    
+    public int damage;
+    public Transform skillPrefab;
 }
 
 public enum SkillType

@@ -59,6 +59,13 @@ public class EnemyPatrolBehaviour : StateMachineBehaviour
             }
         }
 
+        var enemy = animator.GetComponent<Enemy>();
+        // if (enemy.isUnderAttack)
+        // {
+        //     animator.SetBool(IsFollowing, true);
+        //     animator.SetBool(IsPatrolling, false);
+        // }
+
     }
 
 }

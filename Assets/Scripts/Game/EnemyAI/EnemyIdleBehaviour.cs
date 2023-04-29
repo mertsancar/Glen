@@ -20,6 +20,12 @@ public class EnemyIdleBehaviour : StateMachineBehaviour
         {
             animator.SetBool(IsFollowing, true);
         }
+
+        // var enemy = animator.GetComponent<Enemy>();
+        // if (enemy.isUnderAttack)
+        // {
+        //     animator.SetBool(IsFollowing, true);
+        // }
     }
 
 }

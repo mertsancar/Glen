@@ -28,6 +28,9 @@ public class EnemyFollowBehaviour : StateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // var enemy = animator.GetComponent<Enemy>();
+        // enemy.isUnderAttack = false;
+        
         animator.SetBool(IsPatrolling, true);
     }
 }

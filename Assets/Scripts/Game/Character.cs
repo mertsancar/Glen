@@ -8,9 +8,10 @@ public class Character : MonoBehaviour
 {
     public Rigidbody2D rigidbody2D;
     
-    public int health;
-    public float speed;
-    public bool isDead;
+    [SerializeField] protected int health;
+    [SerializeField] protected float speed;
+    [SerializeField] protected bool isDead;
+    // public bool isUnderAttack;
     
     void Start()
     {

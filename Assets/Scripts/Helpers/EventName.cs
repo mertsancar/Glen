@@ -7,4 +7,5 @@ public static class EventName
     public static readonly string ShowScreenRequested = "ShowScreenRequested";
     public static readonly string ScreenShown = "ScreenShown";
     public static readonly string ScreenClosed = "ScreenClosed";
+    
 }
