@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -11,7 +12,7 @@ public class Character : MonoBehaviour
     [SerializeField] protected int health;
     [SerializeField] protected float speed;
     [SerializeField] protected bool isDead;
-    // public bool isUnderAttack;
+    public bool isUnderAttack;
     
     void Start()
     {
@@ -30,6 +31,6 @@ public class Character : MonoBehaviour
     protected virtual void Dead()
     {
         isDead = true;
-        gameObject.SetActive(false);
+        gameObject.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).OnComplete(() => gameObject.SetActive(false));
     }
 }

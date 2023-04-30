@@ -9,10 +9,8 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     
     public Player player;
-    [NonSerialized] public Transform currentSkillPrefab;
-    
-    [Header("Using Abilities")] 
     private List<SkillData> skillsData;
+    [NonSerialized] public Transform currentSkillPrefab;
     
     private void Start()
     {

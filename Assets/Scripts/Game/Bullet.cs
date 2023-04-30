@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
         if (col.gameObject.CompareTag("Enemy"))
         {
             var enemy = col.gameObject.GetComponent<Enemy>();
-            // enemy.isUnderAttack = true;
+            enemy.isUnderAttack = true;
             enemy.GetDamage(25);
             Destroy(gameObject);
         }

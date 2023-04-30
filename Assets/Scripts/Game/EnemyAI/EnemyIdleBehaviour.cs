@@ -16,16 +16,16 @@ public class EnemyIdleBehaviour : StateMachineBehaviour
     {
         var player = _playerPos.GetComponent<Player>();
 
+        var enemy = animator.GetComponent<Enemy>();
+        if (enemy.isUnderAttack)
+        {
+            animator.SetBool(IsFollowing, true);
+        }
         if (Vector2.Distance(_playerPos.position, animator.transform.position) <= 5f && !player.isStealth)
         {
             animator.SetBool(IsFollowing, true);
         }
 
-        // var enemy = animator.GetComponent<Enemy>();
-        // if (enemy.isUnderAttack)
-        // {
-        //     animator.SetBool(IsFollowing, true);
-        // }
     }
 
 }
