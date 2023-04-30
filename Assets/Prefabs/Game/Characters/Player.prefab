@@ -244,9 +244,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 5030020501340992105}
-  health: 100
+  health: 3
   speed: 20
   isDead: 1
+  isUnderAttack: 0
+  isStealth: 0
   jumpPower: 5
   groundCheck: {fileID: 5030020500668325627}
   groundLayer:

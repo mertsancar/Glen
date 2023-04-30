@@ -148,9 +148,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody2D: {fileID: 4683924087650526117}
-  health: 100
+  health: 3
   speed: 13
   isDead: 0
+  isUnderAttack: 0
 --- !u!95 &4683924087650526119
 Animator:
   serializedVersion: 5

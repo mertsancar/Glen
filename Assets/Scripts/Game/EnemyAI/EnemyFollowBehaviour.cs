@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyFollowBehaviour : StateMachineBehaviour
@@ -31,7 +32,8 @@ public class EnemyFollowBehaviour : StateMachineBehaviour
         }
         else
         {
-            animator.transform.position = Vector2.MoveTowards(animator.transform.position, _playerPos.position, 1f * Time.deltaTime);
+            animator.transform.position = Vector2.MoveTowards(animator.transform.position
+                , _playerPos.position, 1f * Time.deltaTime);
         }
     }
 
@@ -42,4 +44,6 @@ public class EnemyFollowBehaviour : StateMachineBehaviour
         
         animator.SetBool(IsPatrolling, true);
     }
+
+
 }

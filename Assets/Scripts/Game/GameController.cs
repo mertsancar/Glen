@@ -9,8 +9,15 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     
     public Player player;
-    private List<SkillData> skillsData;
+    
+    public static List<SkillData> skillsData;
     [NonSerialized] public Transform currentSkillPrefab;
+    [NonSerialized] public Skill currentSkill;
+    
+
+    [Header("Health Bar")] 
+    public Transform healthPrefab;
+    public Transform healthBarLayout;
     
     private void Start()
     {
@@ -18,10 +25,18 @@ public class GameController : MonoBehaviour
         {
             instance = this;
         }
-        
-        
+
+        EventManager.instance.AddListener(EventName.GameStart, Init);
+        EventManager.instance.TriggerEvent(EventName.GameStart);
+    }
+
+    private void Init()
+    {
         skillsData = Resources.Load<SkillTreeItem>("Skills/Skill Tree").skillData;
+        currentSkill = skillsData[0].skills[0];
         currentSkillPrefab = skillsData[0].skills[0].skillPrefab;
+
+        UpdateHealthBar();
     }
 
     private void Update()
@@ -39,6 +54,21 @@ public class GameController : MonoBehaviour
     public void ChangeCurrentSKill(SkillData newSkillData)
     {
         currentSkillPrefab = newSkillData.skills[0].skillPrefab;
+    }
+
+    public void UpdateHealthBar()
+    {
+        for (int i = 0; i < player.GetHealth(); i++)
+        {
+            Instantiate(healthPrefab, healthBarLayout);
+        }
+    }
+
+    public void ResetHealthBar()
+    {
+        foreach (Transform child in healthBarLayout.transform) {
+            Destroy(child.gameObject);
+        }
     }
 
 }

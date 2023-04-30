@@ -8,18 +8,19 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public Rigidbody2D rigidbody2D;
-    
+
     [SerializeField] protected int health;
     [SerializeField] protected float speed;
     [SerializeField] protected bool isDead;
     public bool isUnderAttack;
+    public int GetHealth() => health;
     
     void Start()
     {
         isDead = false;
     }
     
-    public virtual void GetDamage(int damageValue)
+    public virtual void TakeDamage(int damageValue)
     {
         health -= damageValue;
         if (health <= 0)

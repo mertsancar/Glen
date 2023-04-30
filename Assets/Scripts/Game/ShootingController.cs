@@ -134,7 +134,7 @@ public class ShootingController : MonoBehaviour
     {
         bulletPrefab = GameController.instance.currentSkillPrefab;
         var bullet = Instantiate(bulletPrefab);
-        bullet.transform.localPosition = transform.localPosition;   
+        bullet.transform.localPosition = new Vector2(transform.localPosition.x + 0.75f, transform.localPosition.y + 0.75f) ;   
         var bulletRg = bullet.AddComponent<Rigidbody2D>();
         bulletRg.AddForce(force, ForceMode2D.Impulse);
     }
