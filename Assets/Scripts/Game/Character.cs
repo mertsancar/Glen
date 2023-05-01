@@ -5,13 +5,14 @@ using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
     public Rigidbody2D rigidbody2D;
 
     [SerializeField] protected int health;
     [SerializeField] protected float speed;
     [SerializeField] protected bool isDead;
+    protected bool isAttacking = false;
     public bool isUnderAttack;
     public int GetHealth() => health;
     

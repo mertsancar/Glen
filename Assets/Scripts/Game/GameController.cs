@@ -58,13 +58,14 @@ public class GameController : MonoBehaviour
 
     public void UpdateHealthBar()
     {
+        ResetHealthBar();
         for (int i = 0; i < player.GetHealth(); i++)
         {
             Instantiate(healthPrefab, healthBarLayout);
         }
     }
 
-    public void ResetHealthBar()
+    private void ResetHealthBar()
     {
         foreach (Transform child in healthBarLayout.transform) {
             Destroy(child.gameObject);

@@ -5,44 +5,41 @@ using UnityEngine;
 
 public class EnemyPatrolBehaviour : StateMachineBehaviour
 {
+    public Transform enemyTransform;
+    
     public float speed;
     private bool isRight;
     private int randomSpot;
     private List<Vector2> patrolSpots;
     private Vector2 nearestSpot;
-    private Transform _playerPos;
-    private static readonly int IsFollowing = Animator.StringToHash("isFollowing");
-    private static readonly int IsPatrolling = Animator.StringToHash("isPatrolling");
+    private Transform playerTransform;
+
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _playerPos = GameObject.FindGameObjectWithTag("Player").transform;
-        var rightPatrolSpot = new Vector2(animator.transform.position.x + 3, animator.transform.position.y);
-        var leftPatrolSpot = new Vector2(animator.transform.position.x - 3, animator.transform.position.y);
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        enemyTransform = animator.transform;
+
+        var enemyPosition = enemyTransform.position;
+        var rightPatrolSpot = new Vector2(enemyPosition.x + 3, enemyPosition.y);
+        var leftPatrolSpot = new Vector2(enemyPosition.x - 3, enemyPosition.y);
+        
         patrolSpots = new List<Vector2>() {rightPatrolSpot, leftPatrolSpot};
+        var distanceToRightSpot = Vector2.Distance(enemyPosition, rightPatrolSpot);
+        var distanceToLeftSpot = Vector2.Distance(enemyPosition, leftPatrolSpot);
         
-        var distanceToRightSpot = Vector2.Distance(animator.transform.position, rightPatrolSpot);
-        var distanceToLeftSpot = Vector2.Distance(animator.transform.position, leftPatrolSpot);
-        
-        if (distanceToRightSpot > distanceToLeftSpot)
-        {
-            nearestSpot = leftPatrolSpot;
-        }
-        else
-        {
-            nearestSpot = rightPatrolSpot;
-        }
+        nearestSpot = distanceToRightSpot > distanceToLeftSpot ? leftPatrolSpot : rightPatrolSpot;
         
     }
     
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        var player = _playerPos.GetComponent<Player>();
+        var player = playerTransform.GetComponent<Player>();
 
-        if (Vector2.Distance(_playerPos.position, animator.transform.position) <= 5f && !player.isStealth)
+        if (Vector2.Distance(playerTransform.position, animator.transform.position) <= 5f && !player.isStealth)
         {
-            animator.SetBool(IsFollowing, true);
-            animator.SetBool(IsPatrolling, false);
+            animator.SetBool(EnemyAIStates.IsFollowing, true);
+            animator.SetBool(EnemyAIStates.IsPatrolling, false);
         }
         
         animator.transform.position = Vector2.MoveTowards(animator.transform.position, nearestSpot, speed * Time.deltaTime);
@@ -62,8 +59,8 @@ public class EnemyPatrolBehaviour : StateMachineBehaviour
         var enemy = animator.GetComponent<Enemy>();
         if (enemy.isUnderAttack)
         {
-            animator.SetBool(IsFollowing, true);
-            animator.SetBool(IsPatrolling, false);
+            animator.SetBool(EnemyAIStates.IsFollowing, true);
+            animator.SetBool(EnemyAIStates.IsPatrolling, false);
         }
 
     }

@@ -12,8 +12,12 @@ public class Bullet : MonoBehaviour
             var enemy = col.gameObject.GetComponent<Enemy>();
             enemy.isUnderAttack = true;
             enemy.TakeDamage(GameController.instance.currentSkill.damage);
-            Destroy(gameObject);
         }
-
+        if (col.gameObject.CompareTag("Player"))
+        {
+            var player = col.gameObject.GetComponent<Player>();
+            player.TakeDamage(GameController.instance.currentSkill.damage);
+        }
+        Destroy(gameObject);
     }
 }
