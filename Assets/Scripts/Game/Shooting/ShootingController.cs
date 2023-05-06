@@ -8,6 +8,7 @@ public class ShootingController : MonoBehaviour
 {
     public static ShootingController instance;
 
+    public Transform bushSkillPrefab;
     Transform bulletPrefab;
     private bool isDragging = false; 
     private Vector2 startPoint;
@@ -24,6 +25,7 @@ public class ShootingController : MonoBehaviour
     private Transform[] dotsList;
     private Vector2 pos;
     private float timeStamp;
+    private Transform lastDot;
     [SerializeField] [Range (0.01f, 0.3f)] float dotMinScale;
     [SerializeField] [Range (0.3f, 1f)] float dotMaxScale;
     
@@ -79,7 +81,7 @@ public class ShootingController : MonoBehaviour
 
         float scale = dotMaxScale;
         float scaleFactor = scale / dotsNumber;
-
+        
         for (int i = 0; i < dotsNumber; i++) {
             dotsList [i] = Instantiate (dotPrefab, null).transform;
             dotsList [i].parent = dotsParent.transform;
@@ -88,6 +90,9 @@ public class ShootingController : MonoBehaviour
             if (scale > dotMinScale)
                 scale -= scaleFactor;
         }
+        
+        lastDot = dotsList[dotsNumber-1];
+        
     }
 
     public void UpdateDots (Vector3 ballPos, Vector2 forceApplied)
@@ -104,6 +109,8 @@ public class ShootingController : MonoBehaviour
             dotsList [i].position = pos;
             timeStamp += dotSpacing;
         }
+        
+        lastDot = dotsList[dotsNumber-1];
     }
 
     private void OnDragStart()
@@ -118,6 +125,7 @@ public class ShootingController : MonoBehaviour
         distance = Vector2.Distance(startPoint, endPoint);
         direction = (startPoint - endPoint).normalized;
         force = direction * distance * 4f;
+
         
         Debug.DrawLine(startPoint, endPoint);
         
@@ -126,7 +134,8 @@ public class ShootingController : MonoBehaviour
     
     private void OnDragEnd()
     {
-        ShootBullet();
+        Instantiate(bushSkillPrefab, lastDot.position, Quaternion.identity);
+        // ShootBullet();
         Hide();
     }
 

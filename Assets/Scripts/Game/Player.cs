@@ -13,7 +13,7 @@ public class Player : Character
     
     private bool isFacingRight = true;
     private bool isCrouching = false;
-
+    
     
     private void Update()
     {
@@ -22,31 +22,47 @@ public class Player : Character
     
     private void Movement()
     {
-        animator.SetBool("isRunning", Input.GetButton("Horizontal"));
         var horizontal = Input.GetAxisRaw("Horizontal");
+        var boxCollider = GetComponent<BoxCollider2D>();
+        var capsuleCollider = GetComponent<CapsuleCollider2D>();
+        
+        if (Input.GetButton("Horizontal") && Input.GetKey(KeyCode.LeftShift))
+        {
+            animator.SetBool("isCrouching", false);
+            animator.SetBool("isRunning", true);
+        }
+        else if (Input.GetButton("Horizontal"))
+        {
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isCrouching", true);
+            
+            if (Input.GetButtonDown("Horizontal"))
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z);
+                boxCollider.offset = new Vector2(boxCollider.offset.x,boxCollider.offset.y + 0.08753417f);
+                capsuleCollider.offset = new Vector2(capsuleCollider.offset.x, capsuleCollider.offset.y + 0.9f);
+            }
+        }
+
+        if(Input.GetButtonUp("Horizontal"))
+        {
+            animator.SetBool("isCrouching", false);
+            animator.SetBool("isRunning", false);
+            if (!Input.GetKey(KeyCode.LeftShift))
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
+                boxCollider.offset = new Vector2(boxCollider.offset.x,boxCollider.offset.y - 0.08753417f);
+                capsuleCollider.offset = new Vector2(capsuleCollider.offset.x, capsuleCollider.offset.y - 0.9f);
+            }
+        }
+
         rigidbody2D.velocity = new Vector2(horizontal * speed, rigidbody2D.velocity.y) ;
         ChangePlayerDirection(horizontal);
-
+        
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rigidbody2D.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
         }
-        
-        // if (Input.GetKey(KeyCode.C))
-        // {
-        //     if (isCrouching)
-        //     {
-        //         animator.SetBool("isCrouching", false);
-        //         isCrouching = false;
-        //         transform.position = new Vector3(transform.position.x, transform.position.y-0.25f, transform.position.z);
-        //     }
-        //     else
-        //     {
-        //         animator.SetBool("isCrouching", true);
-        //         isCrouching = true;
-        //         transform.position = new Vector3(transform.position.x, transform.position.y+0.25f, transform.position.z);
-        //     }
-        // }
 
     }
 
@@ -92,26 +108,26 @@ public class Player : Character
         {
             isGrounded = true;
         }
-        if (collision.name == "House")
+        if (collision.name is "House" or "Bush(Clone)")
         {
             isStealth = true;
-            var houseSprite = collision.GetComponent<SpriteRenderer>();
-            houseSprite.color = new Color(houseSprite.color.r, houseSprite.color.g, houseSprite.color.b, .75f);
+            var objectSprite = collision.GetComponent<SpriteRenderer>();
+            objectSprite.color = new Color(objectSprite.color.r, objectSprite.color.g, objectSprite.color.b, .75f);
         }
 
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
         }
-        if (collision.name == "House")
+        if (collision.name is "House" or "Bush(Clone)")
         {
             isStealth = false;
-            var houseSprite = collision.GetComponent<SpriteRenderer>();
-            houseSprite.color = new Color(houseSprite.color.r, houseSprite.color.g, houseSprite.color.b, 1f);
+            var objectSprite = collision.GetComponent<SpriteRenderer>();
+            objectSprite.color = new Color(objectSprite.color.r, objectSprite.color.g, objectSprite.color.b, 1f);
         }
     }
 
