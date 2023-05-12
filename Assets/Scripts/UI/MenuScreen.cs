@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuScreen : BaseScreen
@@ -10,9 +11,22 @@ public class MenuScreen : BaseScreen
     [SerializeField] private Button newGameButton;
     [SerializeField] private Button savesButton;
     [SerializeField] private Button optionsButton;
+    [SerializeField] private Button creditsButton;
     [SerializeField] private Button quitButton;
     public override void Prepare(object param)
     {
-        quitButton.onClick.AddListener(Application.Quit);
+        newGameButton.onClick.AddListener(OnClickNewGameButton);
+        savesButton.onClick.AddListener(OnClickSavesButton);
+        quitButton.onClick.AddListener(() => UnityEditor.EditorApplication.isPlaying = false);
+    }
+
+    private void OnClickNewGameButton()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    private void OnClickSavesButton() 
+    {
+        EventManager.instance.TriggerEvent(EventName.ShowScreenRequested, typeof(SavesScreen), null);
     }
 }

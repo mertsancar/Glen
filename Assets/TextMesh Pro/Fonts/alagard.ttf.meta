@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8afcfe5b9ffe8834aa11728c19ff89bd
+guid: 929d54c3306c3af428e528f980249f25
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Pixel
+  - Alagard
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

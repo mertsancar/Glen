@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
     [Header("Health Bar")] 
     public Transform healthPrefab;
     public Transform healthBarLayout;
+
+    public bool isPaused;
     
     private void Start()
     {
@@ -25,6 +27,8 @@ public class GameController : MonoBehaviour
         {
             instance = this;
         }
+
+        isPaused = false;
 
         EventManager.instance.AddListener(EventName.GameStart, Init);
         EventManager.instance.TriggerEvent(EventName.GameStart);
@@ -49,6 +53,10 @@ public class GameController : MonoBehaviour
         {
             ChangeCurrentSKill(skillsData.Find((skill) => skill.skillType == SkillType.Aqua));
         }
+        if (Input.GetKey(KeyCode.Escape)) 
+        {
+            EventManager.instance.TriggerEvent(EventName.ShowScreenRequested, typeof(PauseScreen), null);
+        }
     }
 
     public void ChangeCurrentSKill(SkillData newSkillData)
@@ -72,4 +80,5 @@ public class GameController : MonoBehaviour
         }
     }
 
+   
 }
