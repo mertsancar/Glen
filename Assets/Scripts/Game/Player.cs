@@ -11,7 +11,6 @@ public class Player : Character
     public bool isGrounded;
     public bool isStealth = false;
     
-    private bool isFacingRight = true;
     private bool isCrouching = false;
     
     
@@ -76,30 +75,6 @@ public class Player : Character
     {
         base.Dead();
         EventManager.instance.TriggerEvent(EventName.LevelFail);
-    }
-
-    private void ChangePlayerDirection(float direction)
-    {
-        if (direction > 0 && isFacingRight)
-        {
-            transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y, transform.localScale.z);
-            isFacingRight = true;
-        }
-        else if (direction < 0 && isFacingRight)
-        {
-            transform.localScale = new Vector3(-transform.localScale.x,transform.localScale.y, transform.localScale.z);
-            isFacingRight = false;
-        }
-        else if (direction > 0 && !isFacingRight)
-        {
-            transform.localScale = new Vector3(-transform.localScale.x,transform.localScale.y, transform.localScale.z);
-            isFacingRight = true;
-        }
-        else if (direction < 0 && !isFacingRight)
-        {
-            transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y, transform.localScale.z);
-            isFacingRight = false;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

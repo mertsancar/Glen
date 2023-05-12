@@ -14,6 +14,8 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected bool isDead;
     protected bool isAttacking = false;
     public bool isUnderAttack;
+    
+    private bool isFacingRight = true;
     public int GetHealth() => health;
     
     void Start()
@@ -34,5 +36,29 @@ public abstract class Character : MonoBehaviour
     {
         isDead = true;
         gameObject.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).OnComplete(() => gameObject.SetActive(false));
+    }
+    
+    protected void ChangePlayerDirection(float direction)
+    {
+        if (direction > 0 && isFacingRight)
+        {
+            transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y, transform.localScale.z);
+            isFacingRight = true;
+        }
+        else if (direction < 0 && isFacingRight)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x,transform.localScale.y, transform.localScale.z);
+            isFacingRight = false;
+        }
+        else if (direction > 0 && !isFacingRight)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x,transform.localScale.y, transform.localScale.z);
+            isFacingRight = true;
+        }
+        else if (direction < 0 && !isFacingRight)
+        {
+            transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y, transform.localScale.z);
+            isFacingRight = false;
+        }
     }
 }
