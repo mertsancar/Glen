@@ -1848,7 +1848,7 @@ PrefabInstance:
     - target: {fileID: 4785875562541555539, guid: 11678c9f5fa749541aa710f601c8667a, type: 3}
       propertyPath: healthPrefab
       value: 
-      objectReference: {fileID: 1578049878160813042, guid: fadf9cf839d1e73499d2d69f42f95214, type: 3}
+      objectReference: {fileID: 7179307499140138311, guid: d005532efac68094fa3fe1cd9072cf0b, type: 3}
     - target: {fileID: 4785875562541555539, guid: 11678c9f5fa749541aa710f601c8667a, type: 3}
       propertyPath: healthBarLayout
       value: 
@@ -2449,6 +2449,10 @@ PrefabInstance:
       propertyPath: dotMinScale
       value: 0.022
       objectReference: {fileID: 0}
+    - target: {fileID: 3066891690350204662, guid: 0cebde21117c37c44be042f6d6ba1f97, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 401038968765193504, guid: 9d8554b2c0dfd40488442c4e5caa9df8, type: 3}
     - target: {fileID: 3066891690350204662, guid: 0cebde21117c37c44be042f6d6ba1f97, type: 3}
       propertyPath: bushSkillPrefab
       value: 

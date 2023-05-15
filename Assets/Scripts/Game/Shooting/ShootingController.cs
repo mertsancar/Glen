@@ -9,7 +9,9 @@ public class ShootingController : MonoBehaviour
     public static ShootingController instance;
 
     public Transform bushSkillPrefab;
-    Transform bulletPrefab;
+    public Transform bulletPrefab;
+    
+    
     private bool isDragging = false; 
     private Vector2 startPoint;
     private Vector2 endPoint;
@@ -134,8 +136,15 @@ public class ShootingController : MonoBehaviour
     
     private void OnDragEnd()
     {
-        Instantiate(bushSkillPrefab, lastDot.position, Quaternion.identity);
-        // ShootBullet();
+        switch (GameController.instance.currentSkill.type)
+        {
+            case SkillType.Ignis:
+                ShootBullet();
+                break;
+            case SkillType.Aqua:
+                Instantiate(bushSkillPrefab, lastDot.position, Quaternion.identity);
+                break;
+        }
         Hide();
     }
 

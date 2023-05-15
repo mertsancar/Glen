@@ -8,7 +8,7 @@ public class EnemyPatrolBehaviour : StateMachineBehaviour
     public Transform enemyTransform;
     
     public float speed;
-    private bool isRight = true;
+    public bool isRight = true;
     private int randomSpot;
     private List<Vector2> patrolSpots;
     private Vector2 nearestSpot;
@@ -29,9 +29,21 @@ public class EnemyPatrolBehaviour : StateMachineBehaviour
         var distanceToRightSpot = Vector2.Distance(enemyPosition, rightPatrolSpot);
         var distanceToLeftSpot = Vector2.Distance(enemyPosition, leftPatrolSpot);
         
-        nearestSpot = distanceToRightSpot > distanceToLeftSpot ? leftPatrolSpot : rightPatrolSpot;
-
-        isRight = nearestSpot != leftPatrolSpot;
+        
+        if (isRight)
+        {
+            nearestSpot = rightPatrolSpot;
+            isRight = true;
+            animator.transform.localScale = new Vector3(animator.transform.localScale.x,
+                animator.transform.localScale.y, animator.transform.localScale.z);
+        }
+        else
+        {
+            nearestSpot = leftPatrolSpot;
+            isRight = false;
+            animator.transform.localScale = new Vector3(-animator.transform.localScale.x,
+                animator.transform.localScale.y, animator.transform.localScale.z);
+        }
 
         enemyEyes = GameObject.Find("Eyes");
 
@@ -57,16 +69,34 @@ public class EnemyPatrolBehaviour : StateMachineBehaviour
             if (nearestSpot == patrolSpots[0])
             {
                 nearestSpot = patrolSpots[1];
-                isRight = false;
-                animator.transform.localScale = new Vector3(-animator.transform.localScale.x,
-                    animator.transform.localScale.y, animator.transform.localScale.z);
+                if (isRight)
+                {
+                    isRight = false;
+                    animator.transform.localScale = new Vector3(-1,
+                        animator.transform.localScale.y, animator.transform.localScale.z);
+                }
+                else
+                {
+                    isRight = true;
+                    animator.transform.localScale = new Vector3(1,
+                        animator.transform.localScale.y, animator.transform.localScale.z);
+                }
             }
             else if(nearestSpot == patrolSpots[1])
             {
                 nearestSpot = patrolSpots[0];
-                isRight = true;
-                animator.transform.localScale = new Vector3(animator.transform.localScale.x,
-                    animator.transform.localScale.y, animator.transform.localScale.z);
+                if (isRight)
+                {
+                    isRight = false;
+                    animator.transform.localScale = new Vector3(-1,
+                        animator.transform.localScale.y, animator.transform.localScale.z);
+                }
+                else
+                {
+                    isRight = true;
+                    animator.transform.localScale = new Vector3(1,
+                        animator.transform.localScale.y, animator.transform.localScale.z);
+                }
             }
             
             

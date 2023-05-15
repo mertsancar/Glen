@@ -62,6 +62,7 @@ public class GameController : MonoBehaviour
     public void ChangeCurrentSKill(SkillData newSkillData)
     {
         currentSkillPrefab = newSkillData.skills[0].skillPrefab;
+        currentSkill = newSkillData.skills[0];
     }
 
     public void UpdateHealthBar()

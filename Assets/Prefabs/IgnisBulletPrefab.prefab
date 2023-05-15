@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 401038968765193504}
   - component: {fileID: 4688460106197229703}
-  - component: {fileID: 5822885158343319074}
   - component: {fileID: 4537106159800819898}
+  - component: {fileID: 6411146468554086812}
   m_Layer: 0
   m_Name: IgnisBulletPrefab
   m_TagString: Untagged
@@ -86,18 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5822885158343319074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4253657185970506817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78add70c116665f4280677d8fb10d4af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &4537106159800819898
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -114,3 +102,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.49999997
+--- !u!114 &6411146468554086812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4253657185970506817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78add70c116665f4280677d8fb10d4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

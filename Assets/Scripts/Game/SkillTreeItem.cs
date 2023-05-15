@@ -26,6 +26,7 @@ public struct Skill
     public string description;
     public string stageCount;
     public int price;
+    public SkillType type;
     
     public int damage;
     public Transform skillPrefab;
