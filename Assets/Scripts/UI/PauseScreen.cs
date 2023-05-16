@@ -26,6 +26,6 @@ public class PauseScreen : BaseScreen
 
     private void OnClickReturnMainButton()
     {
-        EventManager.instance.TriggerEvent(EventName.ShowScreenRequested, typeof(MenuScreen), null);
+        SceneManager.LoadScene("Main");
     }
 }
