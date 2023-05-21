@@ -19,7 +19,9 @@ public class GameController : MonoBehaviour
     public Transform healthPrefab;
     public Transform healthBarLayout;
 
-    public bool isPaused;
+
+    public List<GameObject> currentSkillHud;
+
     
     private void Start()
     {
@@ -27,9 +29,7 @@ public class GameController : MonoBehaviour
         {
             instance = this;
         }
-
-        isPaused = false;
-
+        
         EventManager.instance.AddListener(EventName.GameStart, Init);
         EventManager.instance.TriggerEvent(EventName.GameStart);
     }
@@ -48,10 +48,12 @@ public class GameController : MonoBehaviour
         if (Input.GetKey(KeyCode.Q))
         {
             ChangeCurrentSKill(skillsData.Find((skill) => skill.skillType == SkillType.Ignis));
+            UpdateCurrentSkillHud(0);
         }
         if (Input.GetKey(KeyCode.E))
         {
             ChangeCurrentSKill(skillsData.Find((skill) => skill.skillType == SkillType.Aqua));
+            UpdateCurrentSkillHud(1);
         }
         if (Input.GetKey(KeyCode.Escape)) 
         {
@@ -79,6 +81,17 @@ public class GameController : MonoBehaviour
         foreach (Transform child in healthBarLayout.transform) {
             Destroy(child.gameObject);
         }
+    }
+
+    private void UpdateCurrentSkillHud(int index)
+    {
+        foreach (var o in currentSkillHud)
+        {
+            o.gameObject.SetActive(false);
+        }
+        
+        currentSkillHud[index].gameObject.SetActive(true);
+        
     }
 
    
