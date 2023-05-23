@@ -13,6 +13,7 @@ public class PauseScreen : BaseScreen
 
     public override void Prepare(object param)
     {
+        
         resumeButton.onClick.AddListener(OnClickResumeButton);
         returnMainButton.onClick.AddListener(OnClickReturnMainButton);
         quitButton.onClick.AddListener(() => UnityEditor.EditorApplication.isPlaying = false);
@@ -27,5 +28,12 @@ public class PauseScreen : BaseScreen
     private void OnClickReturnMainButton()
     {
         SceneManager.LoadScene("Main");
+    }
+
+    public override void OnDisable()
+    {
+        resumeButton.onClick.RemoveAllListeners();
+        returnMainButton.onClick.RemoveAllListeners();
+        quitButton.onClick.RemoveAllListeners();
     }
 }

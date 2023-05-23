@@ -74,7 +74,7 @@ public class Player : Character
     protected override void Dead()
     {
         base.Dead();
-        EventManager.instance.TriggerEvent(EventName.LevelFail);
+        EventManager.instance.TriggerEvent(EventName.ShowScreenRequested, typeof(LevelFailScreen), null);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

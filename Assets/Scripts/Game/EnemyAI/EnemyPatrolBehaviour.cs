@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyPatrolBehaviour : StateMachineBehaviour
 {
-    public Transform enemyTransform;
+    private Transform enemyTransform;
     
     public float speed;
     public bool isRight = true;

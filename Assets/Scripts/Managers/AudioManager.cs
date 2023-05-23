@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,12 +44,7 @@ public class AudioManager : MonoBehaviour
             bgmSource.Play();
         }
     }
-    
-    public void PlayAudioIfNotPlaying(AudioType audioType, bool loop = false)
-    {
-        if (IsAudioPlaying(audioType)) return;
-        PlayAudio(audioType, loop);
-    }
+   
     
     public void PlayAudio(AudioType audioType, bool loop = false)
         {
@@ -149,15 +146,6 @@ public class AudioManager : MonoBehaviour
             return available;
         }
 
-    public void SetMusicEnabled()
-        {
-            var music = PlayerPrefs.GetInt("MusicOn");
-
-            if (bgmSource != null)
-            {
-                bgmSource.mute = music == 0;
-            }
-        }
 }
 
 public enum AudioType

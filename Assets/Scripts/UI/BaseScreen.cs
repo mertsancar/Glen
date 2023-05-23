@@ -20,6 +20,8 @@ public class BaseScreen : MonoBehaviour
         var canvasGroup = GetComponent<CanvasGroup>();
         DOTween.To(() => canvasGroup.alpha, x => canvasGroup.alpha = x, 1, 0.5f);
     }
+
+    public virtual void OnDisable() { }
     
     public void OnCloseButtonClicked()
     {
