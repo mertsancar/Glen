@@ -32,6 +32,8 @@ public class GameController : MonoBehaviour
         
         EventManager.instance.AddListener(EventName.GameStart, Init);
         EventManager.instance.TriggerEvent(EventName.GameStart);
+        var player = GetComponent<Player>();
+        
     }
 
     private void Init()

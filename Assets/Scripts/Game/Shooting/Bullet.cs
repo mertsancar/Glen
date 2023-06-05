@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public GameObject bushFirePrefab;
+    
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Enemy"))
@@ -17,6 +19,12 @@ public class Bullet : MonoBehaviour
         {
             var player = col.gameObject.GetComponent<Player>();
             player.TakeDamage(GameController.instance.currentSkill.damage);
+        }
+        if (col.gameObject.CompareTag("Ground"))
+        {
+            var position = transform.position;
+            var go = Instantiate(bushFirePrefab, new Vector3(position.x, position.y-0.5f, position.z), Quaternion.identity);
+            Destroy(gameObject);
         }
         Destroy(gameObject);
     }
