@@ -22,7 +22,7 @@ public class MenuScreen : BaseScreen
 
     private void OnClickNewGameButton()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Game");
     }
 
     private void OnClickSavesButton() 

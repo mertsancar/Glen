@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
 {
     public static GameController instance;
     
+    public bool gameOver = false;
+    
     public Player player;
     
     public static List<SkillData> skillsData;

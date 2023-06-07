@@ -27,7 +27,7 @@ public class PauseScreen : BaseScreen
 
     private void OnClickReturnMainButton()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Menu");
     }
 
     public override void OnDisable()

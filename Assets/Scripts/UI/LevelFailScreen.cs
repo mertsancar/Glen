@@ -13,20 +13,22 @@ public class LevelFailScreen : BaseScreen
     public override void Prepare(object param)
     {
         EventManager.instance.TriggerEvent(EventName.LevelFail);
+        GameController.instance.gameOver = true;
     }
 
     public void OnClickAgainButton()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Game");
     }
 
     public void OnClickReturnMainButton()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Menu");
     }
 
     public void OnClickQuitButton()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
 }

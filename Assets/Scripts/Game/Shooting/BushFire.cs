@@ -8,10 +8,10 @@ public class BushFire : MonoBehaviour
 {
     private void Start()
     {
-        StartCoroutine(DisableBush());
+        StartCoroutine(DisableFire());
     }
 
-    private IEnumerator DisableBush()
+    private IEnumerator DisableFire()
     {
         yield return new WaitForSeconds(5);
         gameObject.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).OnComplete(() => gameObject.SetActive(false));
@@ -19,15 +19,16 @@ public class BushFire : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Enemy"))
+        if (col.gameObject.CompareTag("Ground"))
         {
-            var enemy = col.gameObject.GetComponent<Enemy>();
-            enemy.TakeDamage(1);
+            var rb = GetComponent<Rigidbody2D>();
+            Destroy(rb);
         }
-        if (col.gameObject.CompareTag("Player"))
+        if (col.gameObject.CompareTag("Enemy") || col.gameObject.CompareTag("Player"))
         {
-            var player = col.gameObject.GetComponent<Player>();
-            player.TakeDamage(1);
+            var character = col.gameObject.GetComponent<Character>();
+            character.TakeDamage(1);
         }
+
     }
 }

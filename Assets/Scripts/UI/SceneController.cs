@@ -14,7 +14,7 @@ public class SceneController : MonoBehaviour
     }
     public void NewScene()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Game");
     }
 
     public void PauseGame() 
@@ -39,7 +39,7 @@ public class SceneController : MonoBehaviour
 
     public void ReturnMain() 
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Menu");
 
     }
 

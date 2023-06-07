@@ -12,24 +12,40 @@ public class Player : Character
     public bool isStealth = false;
     
     private bool isCrouching = false;
+    private bool isLadder = false;
+    private bool isClimbing = false;
     
     
     private void Update()
     {
         Movement();
     }
-    
+
+    private void FixedUpdate()
+    {
+        if (isClimbing)
+        {
+            rigidbody2D.gravityScale = 0f;
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, Input.GetAxisRaw("Vertical") * speed / 2);
+        }
+        else
+        {
+            rigidbody2D.gravityScale = 4f;
+        }
+    }
+
     private void Movement()
     {
         var horizontal = Input.GetAxisRaw("Horizontal");
+        var vertical = Input.GetAxisRaw("Vertical");
         var boxCollider = GetComponent<BoxCollider2D>();
         var capsuleCollider = GetComponent<CapsuleCollider2D>();
         
-        if (Input.GetButton("Horizontal") && Input.GetKey(KeyCode.LeftShift))
+        if (isLadder && Mathf.Abs(vertical) > 0f)
         {
-            animator.SetBool("isCrouching", false);
-            animator.SetBool("isRunning", true);
+            isClimbing = true;
         }
+
         else if (Input.GetButton("Horizontal"))
         {
             animator.SetBool("isRunning", false);
@@ -37,23 +53,16 @@ public class Player : Character
             
             if (Input.GetButtonDown("Horizontal"))
             {
-                transform.position = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z);
-                boxCollider.offset = new Vector2(boxCollider.offset.x,boxCollider.offset.y + 0.08753417f);
-                capsuleCollider.offset = new Vector2(capsuleCollider.offset.x, capsuleCollider.offset.y + 0.9f);
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                boxCollider.offset = new Vector2(boxCollider.offset.x,boxCollider.offset.y);
+                capsuleCollider.offset = new Vector2(capsuleCollider.offset.x, capsuleCollider.offset.y);
             }
         }
-
-        if(Input.GetButtonUp("Horizontal"))
+        else if (!Input.GetButton("Horizontal"))
         {
             animator.SetBool("isCrouching", false);
-            animator.SetBool("isRunning", false);
-            if (!Input.GetKey(KeyCode.LeftShift))
-            {
-                transform.position = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
-                boxCollider.offset = new Vector2(boxCollider.offset.x,boxCollider.offset.y - 0.08753417f);
-                capsuleCollider.offset = new Vector2(capsuleCollider.offset.x, capsuleCollider.offset.y - 0.9f);
-            }
         }
+        
 
         rigidbody2D.velocity = new Vector2(horizontal * speed, rigidbody2D.velocity.y) ;
         ChangePlayerDirection(horizontal);
@@ -79,15 +88,21 @@ public class Player : Character
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wall"))
         {
             isGrounded = true;
         }
         if (collision.name is "House" or "Bush(Clone)")
         {
             isStealth = true;
+            GetComponent<Animator>().SetBool("isCrouching", true);
             var objectSprite = collision.GetComponent<SpriteRenderer>();
             objectSprite.color = new Color(objectSprite.color.r, objectSprite.color.g, objectSprite.color.b, .75f);
+        }
+
+        if (collision.CompareTag("Vine"))
+        {
+            isLadder = true;
         }
 
     }
@@ -101,8 +116,14 @@ public class Player : Character
         if (collision.name is "House" or "Bush(Clone)")
         {
             isStealth = false;
+            GetComponent<Animator>().SetBool("isCrouching", false);
             var objectSprite = collision.GetComponent<SpriteRenderer>();
             objectSprite.color = new Color(objectSprite.color.r, objectSprite.color.g, objectSprite.color.b, 1f);
+        }
+        if (collision.CompareTag("Vine"))
+        {
+            isLadder = false;
+            isClimbing = false;
         }
     }
 

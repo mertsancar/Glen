@@ -6,9 +6,11 @@ using UnityEngine;
 
 public class Bush : MonoBehaviour
 {
+    public GameObject vinePrefab;
+    
     private void Start()
     {
-        StartCoroutine(DisableBush());
+        // StartCoroutine(DisableBush());
     }
 
     private IEnumerator DisableBush()
@@ -16,7 +18,7 @@ public class Bush : MonoBehaviour
         yield return new WaitForSeconds(5);
         gameObject.GetComponent<SpriteRenderer>().DOFade(0, 0.5f).OnComplete(() => gameObject.SetActive(false));
     }
-    
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.CompareTag("Ground"))
@@ -24,6 +26,11 @@ public class Bush : MonoBehaviour
             GetComponent<Animator>().SetBool("Genarate", true);
             var rb = GetComponent<Rigidbody2D>();
             Destroy(rb);
+        }
+        else if (col.gameObject.CompareTag("Wall"))
+        {
+            Instantiate(vinePrefab, transform.position, Quaternion.identity);
+            Destroy(this);
         }
     }
 }
